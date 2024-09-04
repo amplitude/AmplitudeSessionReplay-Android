@@ -19,7 +19,7 @@ Depending on the analytics library you use, you can use one of the following int
 1. Install the dependencies
 ```gradle
 implementation("com.amplitude:plugin-session-replay-android:[0.10.0, 1.0.0]")
-implementation("com.amplitude:analytics-android:[1.16.7, 2.0.0]")
+implementation("com.amplitude:analytics-android:[1.16.8, 2.0.0]")
 ```
 2. Initialize the SDK
 ```kotlin
