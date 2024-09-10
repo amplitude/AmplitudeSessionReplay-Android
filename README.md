@@ -18,7 +18,7 @@ Depending on the analytics library you use, you can use one of the following int
 
 1. Install the dependencies
 ```gradle
-implementation("com.amplitude:plugin-session-replay-android:[0.10.0, 1.0.0]")
+implementation("com.amplitude:plugin-session-replay-android:[0.11.1, 1.0.0]")
 implementation("com.amplitude:analytics-android:[1.16.8, 2.0.0]")
 ```
 2. Initialize the SDK
@@ -39,7 +39,7 @@ amplitude.add(sessionReplayPlugin)
 ### Ampitude-Android SDK (Legacy SDK)
 1. Install the dependencies
 ```gradle
-implementation("com.amplitude:middleware-session-replay-android:[0.10.0, 1.0.0]")
+implementation("com.amplitude:middleware-session-replay-android:[0.11.1, 1.0.0]")
 implementation("com.amplitude:android-sdk:[2.40.1,3.0.0]")
 ```
 2. Initialize the SDK
