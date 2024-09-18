@@ -35,6 +35,7 @@ val amplitude = Amplitude(Configuration(
 val sessionReplayPlugin = SessionReplayPlugin(sampleRate = 1.0)
 amplitude.add(sessionReplayPlugin)
 ```
+[Developer docs](http://docs.developers.amplitude.com/session-replay/sdks/plugin-android)
 
 ### Ampitude-Android SDK (Legacy SDK)
 1. Install the dependencies
@@ -57,3 +58,7 @@ val sessionReplayMiddleware = SessionReplayMiddleware(amplitude, sampleRate = 1.
 // Recording will be handled automatically
 amplitude.addEventMiddleware(sessionReplayMiddleware)
 ```
+[Developer docs](https://www.docs.developers.amplitude.com/session-replay/sdks/middleware-android/)
+
+## Need Help?
+If you have any issues using our SDK, feel free to [create a GitHub issue](https://github.com/amplitude/AmplitudeSessionReplay-Android/issues/new/choose) or submit a request on [Amplitude Help](https://help.amplitude.com/hc/en-us/requests/new).
