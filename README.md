@@ -14,12 +14,12 @@ AmplitudeSessionReplay integrates via plugin to your core analytics library.
 ## Instructions
 Depending on the analytics library you use, you can use one of the following integrations to capture session replays.
 
-### Amplidue-Kotlin SDK
+### Amplitude-Kotlin SDK
 
 1. Install the dependencies
 ```gradle
-implementation("com.amplitude:plugin-session-replay-android:[0.11.1, 1.0.0]")
-implementation("com.amplitude:analytics-android:[1.16.8, 2.0.0]")
+implementation("com.amplitude:plugin-session-replay-android:0.30.0")
+implementation("com.amplitude:analytics-android:1.30.0")
 ```
 2. Initialize the SDK
 ```kotlin
@@ -30,24 +30,27 @@ val amplitude = Amplitude(Configuration(
     defaultTracking = DefaultTrackingOptions(sessions = true),
 ))
  
-// Create and Install Session Replay Plugin
-// Recording will be handled automatically
-val sessionReplayPlugin = SessionReplayPlugin(sampleRate = 1.0)
+// Create and install Session Replay Plugin
+// Recording is handled automatically
+val sessionReplayPlugin = SessionReplayPlugin(
+    context = applicationContext,
+    sampleRate = 1.0,
+)
 amplitude.add(sessionReplayPlugin)
 ```
-[Developer docs](http://docs.developers.amplitude.com/session-replay/sdks/plugin-android)
+[Developer docs](https://amplitude.com/docs/sdks/session-replay/session-replay-android-plugin)
 
-### Ampitude-Android SDK (Legacy SDK)
+### Amplitude-Android SDK (Legacy SDK)
 1. Install the dependencies
 ```gradle
-implementation("com.amplitude:middleware-session-replay-android:[0.11.1, 1.0.0]")
-implementation("com.amplitude:android-sdk:[2.40.1,3.0.0]")
+implementation("com.amplitude:middleware-session-replay-android:0.30.0")
+implementation("com.amplitude:android-sdk:2.40.1")
 ```
 2. Initialize the SDK
-```Kotlin
+```kotlin
 val amplitude = Amplitude.getInstance()
     .initialize(this, AMPLITUDE_API_KEY)
-    // Replay events will be flushed on close as well
+    // Replay events are flushed on close as well
     // If setFlushEventsOnClose(false) you must call flush() manually
     .setFlushEventsOnClose(true)
  
@@ -55,14 +58,36 @@ val amplitude = Amplitude.getInstance()
 val sessionReplayMiddleware = SessionReplayMiddleware(amplitude, sampleRate = 1.0)
  
 // Add session replay middleware
-// Recording will be handled automatically
+// Recording is handled automatically
 amplitude.addEventMiddleware(sessionReplayMiddleware)
 ```
-[Developer docs](https://www.docs.developers.amplitude.com/session-replay/sdks/middleware-android/)
+[Developer docs](https://amplitude.com/docs/sdks/session-replay/session-replay-android-middleware)
+
+### Standalone SDK
+Use the standalone SDK when capturing replays alongside another analytics provider or custom event pipeline.
+
+1. Install the dependency
+```gradle
+implementation("com.amplitude:session-replay-android:0.30.0")
+```
+2. Initialize the SDK
+```kotlin
+val sessionReplay = SessionReplay(
+    apiKey = API_KEY,
+    context = applicationContext,
+    deviceId = "DEVICE_ID",
+    sessionId = System.currentTimeMillis(),
+    sampleRate = 1.0,
+)
+
+// Add session replay properties to your analytics events
+val sessionProperties = sessionReplay.getSessionReplayProperties()
+```
+[Developer docs](https://amplitude.com/docs/sdks/session-replay/session-replay-android-standalone)
 
 ## Masking
 
-Session Replay masks text input fields by default. The `maskLevel` in your `PrivacyConfig` controls how much beyond that is masked — `light`, `medium` (the default), or `conservative`. See [Mask on-screen data](https://amplitude.com/docs/session-replay/sdks/plugin-android#mask-on-screen-data) for the full reference.
+Session Replay masks text input fields by default. The `maskLevel` in your `PrivacyConfig` controls how much beyond that is masked, including `light`, `medium` (the default), or `conservative`. See [Mask on-screen data](https://amplitude.com/docs/sdks/session-replay/session-replay-android-plugin#mask-on-screen-data) for the full reference.
 
 Use the options below to override masking for individual elements.
 
